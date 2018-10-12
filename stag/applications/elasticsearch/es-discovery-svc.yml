@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-discovery
+  labels:
+    component: elasticsearch
+    role: combined
+spec:
+  selector:
+    component: elasticsearch
+    role: combined
+  ports:
+  - name: transport
+    port: 9300
+    protocol: TCP

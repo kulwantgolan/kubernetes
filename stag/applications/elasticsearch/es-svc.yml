@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  labels:
+    component: elasticsearch
+    role: client
+spec:
+  selector:
+    component: elasticsearch
+    role: combined
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+    #    nodePort: 30920
+  type: ClusterIP
+  clusterIP: None
