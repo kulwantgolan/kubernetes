@@ -35,11 +35,17 @@ spec:
           value: :5000
         - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
           value: /var/lib/registry
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: /certs/domain.crt
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: /certs/domain.key
         - name: REGISTRY_STORAGE_DELETE_ENABLED
           value: "true"
         volumeMounts:
         - name: image-store
           mountPath: /var/lib/registry
+        - name: cert-dir
+          mountPath: /certs
         ports:
         - containerPort: 5000
           name: registry
@@ -48,3 +54,6 @@ spec:
       - name: image-store
         persistentVolumeClaim:
           claimName: kube-registry
+      - name: cert-dir
+        secret:
+          secretName: registry-tls-secret
