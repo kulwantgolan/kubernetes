@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+spec:
+# Can also use LoadBalancer type
+  type: NodePort
+  ports:
+  - name: https
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  externalIPs: ["172.31.40.253", "172.31.42.89", "172.31.38.214"]
+  selector:
+    k8s-app: nginx-ingress-lb
